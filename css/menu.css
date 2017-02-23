@@ -1,0 +1,42 @@
+        .menu-nav-button{
+            margin:3px 0;
+        }
+        .menu-nav-button a {
+            border: none;
+            font-size: 10px;
+            line-height: 1.1;
+            color: #717171;
+        }
+        .menu-nav-button a span {
+            font-size: 20px;
+        }
+        .menu-bar{
+            display: block;
+            width: 22px;
+            height: 2px;
+            border-radius: 1px;
+            background-color: #888;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 4px;
+        }
+        .menu-bar:last-child{
+            margin-bottom:3px;
+        }
+        /*閉じるicon*/
+        .menu-close {
+            margin-top: 8px;
+            color: #717171;
+            font-size: 30px;
+        }
+        /*    項目*/
+        .item{
+            color:gray;
+        }
+        .item span,
+        .item p{
+            color:#4e4e4e;
+        }
+        .item p{
+            margin-top:10px;
+        }

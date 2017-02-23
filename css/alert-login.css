@@ -1,0 +1,9 @@
+/*        ログイン画面のアラート表示*/
+.alert-login{
+    margin-top:15px;
+}
+.alert-email,
+.alert-password{
+    margin-top:5px;
+    color:#c63f3f;
+}
