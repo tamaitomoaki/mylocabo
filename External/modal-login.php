@@ -16,7 +16,6 @@
                         <div class="alert-password"></div>
                     </div>
                     <button type="submit" class="btn btn-success btn-lg btn-block hidden" id="login-btn" value="ログイン"></button>
-<!--                    <button class="btn btn-success btn-lg btn-block" id="dummy-btn">ログイン</button>-->
                     <a class="btn btn-success btn-lg btn-block" role="button" id="dummy-btn">ログイン</a>
                 </form>
                 <div class="modal-alert"></div>
@@ -25,12 +24,6 @@
                 <p>まだ登録されていない方は、<br>新規に登録をしてアカウントを<br>作成しましょう。</p>
                 <a href="<?php __DIR__;?>/L/newmenber-r/index.php" class="btn btn-danger btn-lg btn-block">登録する</a>
             </div>
-<!--
-			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">閉じる</button>
-				<button type="button" class="btn btn-primary">ボタン</button>
-			</div>
--->
 		</div>
 	</div>
 </div>

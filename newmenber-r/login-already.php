@@ -1,16 +1,12 @@
 <?php
 session_start();
 include("../function.php");
-//2. セッションチェック(前ページのSESSION＿IDと現在のsession_idを比較)
-//sessionCheck();//セッションの入れ替え
 
 //値を受け取っているか確認
 if(
   !isset($_GET["email"]) || $_GET["email"]=="" 
 ){
-//  exit('ParamError');
     header("location: ../index.php");
-//    echo "ok";
     exit();
 }
 
@@ -55,24 +51,8 @@ $name = $val["name"];
     <!-- BootstrapのJS読み込み -->
     <script src="../js/bootstrap.js"></script>
     <style>
-        /*スタンスの違いを表す色*/
-        
-        .marker_yellow_hoso {
-            background: linear-gradient(transparent 60%, #ffff66 60%);
-            color: #545454;
-        }
-        
-        .marker_red_hoso {
-            background: linear-gradient(transparent 60%, #ff7466 60%);
-            color: #545454;
-        }
-        
-        .marker_green_hoso {
-            background: linear-gradient(transparent 60%, #ceff66 60%);
-            color: #545454;
-        }
         /*    モーダルのデザイン*/
-        
+
         .modal-footer {
             text-align: left;
             color: gray;
@@ -100,7 +80,6 @@ $name = $val["name"];
                 <h3><?=$email?></h3>
                 <form name="login-already" action="../login_act.php" method="post" id="login-already">
                     <div class="form-group">
-                        <!--                    <label for="passwd">パスワード</label>-->
                         <input type="password" class="form-control input-lg validate[required]" name="password" id="password" placeholder="パスワード" autocomplete="off" required>
                     </div>
                     <input type="hidden" id="email" name="email" value="<?=h($email)?>">
@@ -110,11 +89,6 @@ $name = $val["name"];
                 </form>
             </div>
         </div>
-    </div>
-    
-    <script>
-        
-
-    </script>   
+    </div>  
 </body>
 </html>

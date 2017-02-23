@@ -1,16 +1,12 @@
 <?php
 session_start();
 include("../function.php");
-//2. セッションチェック(前ページのSESSION＿IDと現在のsession_idを比較)
-//sessionCheck();//セッションの入れ替え
 
 //入力チェック(受信確認処理追加)
 if(
   !isset($_GET["area"]) || $_GET["area"]=="" 
 ){
-//  exit('ParamError');
     header("location: ../index.php");
-//    echo "ok";
     exit();
 }
 
@@ -36,212 +32,208 @@ $pagetype = strstr($pagetype,'?',true);
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         <!-- BootstrapのJS読み込み -->
         <script src="../js/bootstrap.js"></script>
-        <style>
-            /*        このページの地図の表示のため*/
-            
-            body {
-                padding-bottom: 0px;
-            }
-            /*        */
-            
-            .jumbotron {
-                background: white;
-            }
-            
-            .search-box {
-                margin: 20px 10px 0px;
-            }
-            .display-list{
-                overflow: scroll;
-            }
-            #display-map,
-            .display-map{
-                position:relative;
-                padding-left: 0px;
-                padding-right: 0px;
-            }
-/*
-            #map-big {
-                overflow: hidden;
-                
-            }
-*/
-            #display-map{
-                margin-left:400px;
-            }
-            #display-map button{
-                position:absolute;
-                left:55px;
-                top:20px;
-                z-index: 10;
-            }
-            .display-map button{
-                position:absolute;
-                left:1em;
-                top:1em;
-                z-index:10;
-            }
-            
-            
-            
-            /*        リンク装飾*/
-        a:link{
-   
-        } 
-        a:visited{
- 
-        } 
-        a:hover{
+    <style>
+        /*        このページの地図の表示のため*/
 
-            text-decoration: none ;
-        } 
-        a:active{
+        body {
+            padding-bottom: 0px;
+        }
+        /*        */
 
-        }
-            /*        ホバーした際のアクション*/
-        .tach:hover{
-           background-color:#f5f5f5;
-            text-decoration: none;
-        }
-            /*レビュー星のcss*/
-        .list-rating span{
-            color:#d2d2d2;
-        }
-        .list-rating .color{
-            color:#EB6E00;
+        .jumbotron {
+            background: white;
         }
 
-            
-/*
-            
-            .display-list{
-            height:100px;
+        .search-box {
+            margin: 20px 10px 0px;
+        }
+
+        .display-list {
             overflow: scroll;
         }
-*/
-            
-            
-            
-                /*        リストcss*/
-            .display-area{
-                width:400px;
-                float:left;
-            }
-        .display-area .list-media{
-            padding:10px;
+
+        #display-map,
+        .display-map {
+            position: relative;
+            padding-left: 0px;
+            padding-right: 0px;
         }
-/*        リストの投稿画像サイズ指定*/
-        .list-img{
-            width:25%;
+
+        #display-map {
+            margin-left: 400px;
         }
-        .list-img img{
-            width:100%;
-            
+
+        #display-map button {
+            position: absolute;
+            left: 55px;
+            top: 20px;
+            z-index: 10;
         }
-/*        リストプロフィール画像*/
-        .list-profileimg{
-            width:30px;
-            display:inline-block;
+
+        .display-map button {
+            position: absolute;
+            left: 1em;
+            top: 1em;
+            z-index: 10;
         }
-        .list-spotname{
-            display:inline-block;
+        /*        リンク装飾*/
+
+        a:link {}
+
+        a:visited {}
+
+        a:hover {
+            text-decoration: none;
         }
-    .list-spotname h4{
-        color:#484848;
-    }
-        .list-content{
+
+        a:active {}
+        /*        ホバーした際のアクション*/
+
+        .tach:hover {
+            background-color: #f5f5f5;
+            text-decoration: none;
+        }
+        /*レビュー星のcss*/
+
+        .list-rating span {
+            color: #d2d2d2;
+        }
+
+        .list-rating .color {
+            color: #EB6E00;
+        }
+        /*        リストcss*/
+
+        .display-area {
+            width: 400px;
+            float: left;
+        }
+
+        .display-area .list-media {
+            padding: 10px;
+        }
+        /*        リストの投稿画像サイズ指定*/
+
+        .list-img {
+            width: 25%;
+        }
+
+        .list-img img {
+            width: 100%;
+        }
+        /*        リストプロフィール画像*/
+
+        .list-profileimg {
+            width: 30px;
+            display: inline-block;
+        }
+
+        .list-spotname {
+            display: inline-block;
+        }
+
+        .list-spotname h4 {
+            color: #484848;
+        }
+
+        .list-content {
             font-size: 12px;
-            color:#484848;
-/*            visibility: hidden;*/
+            color: #484848;
         }
-        .list-rating{
-            padding-top:10px;
+
+        .list-rating {
+            padding-top: 10px;
         }
-        .point{
-            color:gray;
-            font-size:10px;
+
+        .point {
+            color: gray;
+            font-size: 10px;
         }
-        .media-header{
-            margin-bottom:5px;
+
+        .media-header {
+            margin-bottom: 5px;
         }
         /*        名前のボジション*/
-.position-name{
-        vertical-align: bottom;
-    }
-/*            マップ表示画面のスライダー*/
-            .map-detail{
-    width:100%;
-    height:120px;
-/*
-    position: absolute;
-    z-index: 1;
-    bottom:18vw;
-*/
-/*    padding:0 2vw;*/
-}
-.slider {
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    position: relative;
-    margin: 0 auto;
-}
 
-.slider .slideSet {
-    height: 100%;
-    position: absolute;
-}
+        .position-name {
+            vertical-align: bottom;
+        }
+        /*            マップ表示画面のスライダー*/
 
-.slider .slide {
-    width: 90vw;
-    height: 100%;
-    float: left;
-    background: white;
-    margin-top: 0px;
-    padding:10px;
-}
+        .map-detail {
+            width: 100%;
+            height: 120px;
+        }
 
-.slider img {
-    width: 20vw;
-}
+        .slider {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            position: relative;
+            margin: 0 auto;
+        }
 
-.slide .media-left {
-    padding-right: 3.5vw;
-}
-            .pager{
-                margin:2vh 0 0;
-            }
-/*            リスト、マップ切り替えボタン*/
-            #switching{
-                margin-right:8px;
-            }
-            #switching button{
-                color:gray;
-            }
-            
-            /*        データがない時表示*/
-        .nodata{
-            width:90%;
-            color:#484848;
-            margin-top:50px;
+        .slider .slideSet {
+            height: 100%;
+            position: absolute;
         }
-        .nodata span{
-            font-size:30px;
-            
+
+        .slider .slide {
+            width: 90vw;
+            height: 100%;
+            float: left;
+            background: white;
+            margin-top: 0px;
+            padding: 10px;
         }
-        .nodata-title{
-            margin-top:15px;
-            margin-bottom:15px;
-            font-size:32px;
+
+        .slider img {
+            width: 20vw;
         }
-        .nodata-content{
-            font-size:18px;
-            color:gray;
+
+        .slide .media-left {
+            padding-right: 3.5vw;
         }
-        .nodata .nodata-example{
-            font-size:18px;
+
+        .pager {
+            margin: 2vh 0 0;
         }
-        </style>
+        /*            リスト、マップ切り替えボタン*/
+
+        #switching {
+            margin-right: 8px;
+        }
+
+        #switching button {
+            color: gray;
+        }
+        /*        データがない時表示*/
+
+        .nodata {
+            width: 90%;
+            color: #484848;
+            margin-top: 50px;
+        }
+
+        .nodata span {
+            font-size: 30px;
+        }
+
+        .nodata-title {
+            margin-top: 15px;
+            margin-bottom: 15px;
+            font-size: 32px;
+        }
+
+        .nodata-content {
+            font-size: 18px;
+            color: gray;
+        }
+
+        .nodata .nodata-example {
+            font-size: 18px;
+        }
+    </style>
     </head>
 
     <body>
@@ -261,90 +253,14 @@ $pagetype = strstr($pagetype,'?',true);
             </nav>
 
             <!-- Main jumbotron for a primary marketing message or call to action -->
-
-
-
-            
-
         </div>
         <!-- /container -->
 
         <div class="container-fluid">
-        <div class="row">
-<!--
-                <div class="col-sm-2 col-md-2">
-                <div class="thumbnail"><img src="../img/fronta.jpg" class="img-circle" alt="..."></div>
-            <p class="text-center"><strong><?=$name?></strong></p>
-                   <div class="list-group">
-                        <a id="review-list" class="list-group-item">投稿リスト<span class="pull-right"><?=$countreview?>件</span></a>
-                        <a class="list-group-item">お気に入り</a>
-                        <a class="list-group-item">行った</a>
-                    </div>
-                    
-                    
-                    <div class="list-group">
-                        <a id="top" class="list-group-item">トップ</a>
-                        <a href="./profile-edit.php" class="list-group-item">プロフィール</a>
-                        <a href="../logout.php" class="list-group-item">ログアウト</a>
-                    </div>
-                </div>
--->
-
-<div class="display-area">
-    <div class="display-area-base hidden-xs">
-       <div class="search-box">
-            <div class="input-group input-group-lg">
-                <input type="text" class="form-control" id="address" placeholder="場所を入力">
-                <span class="input-group-btn">
-            <button type="button" class="search-map-button btn btn-default">検索</button>
-        </span>
-            </div>
-        </div>
-        <hr class="hrsmall">
-<!--
-        <div class="container-fluid">
             <div class="row">
-                <div class="result-box col-md-12"></div>
-            </div>
-        </div>
--->
-        <div class="display-list show"></div>
-        
-    </div>
-<!--    スマホサイズのページ構造-->
-    <div class="display-xs visible-xs-block">
-       <div class="display-list hidden"></div>
-       <div class="display-map show">
-           <div id="map-small" class="display-map"></div>
-           <button id="" class="re-search-btn btn btn-default re-search">再検索をする</button>
-       </div>
-       <!--    クリックされた店舗のリスト挿入位置-->
-        <div class="map-detail show">
-            <div class="slider">
-                <div class="slideSet">
-                </div>
-            </div>
-            <nav>
-                <ul class="pager">
-                    <li class="previous slider-prev"><a href="#">前へ</a></li>
-                    <li class="next slider-next"><a href="#">次へ</a></li>
-                </ul>
-            </nav>
-        </div>
-    </div>
-</div>
-<!--                マップ表示-->
-                <div id="display-map" class="hidden-xs">
-                   <div id="map-big" class="map"></div>
-                   <button id="" class="re-search-btn btn btn-default re-search">再検索をする</button>
-                    
-                </div>
-            </div>
-<!--
-            <div class="row">
-                <div class="list col-md-6 col-sm-6">
-                    <div class="row ">
-                        <div class="search-box">
+                <div class="display-area">
+                    <div class="display-area-base hidden-xs">
+                       <div class="search-box">
                             <div class="input-group input-group-lg">
                                 <input type="text" class="form-control" id="address" placeholder="場所を入力">
                                 <span class="input-group-btn">
@@ -353,25 +269,38 @@ $pagetype = strstr($pagetype,'?',true);
                             </div>
                         </div>
                         <hr class="hrsmall">
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="result-box col-md-12"></div>
+                        <div class="display-list show"></div>
+
+                    </div>
+                <!--    スマホサイズのページ構造-->
+                    <div class="display-xs visible-xs-block">
+                       <div class="display-list hidden"></div>
+                       <div class="display-map show">
+                           <div id="map-small" class="display-map"></div>
+                           <button id="" class="re-search-btn btn btn-default re-search">再検索をする</button>
+                       </div>
+                       <!--    クリックされた店舗のリスト挿入位置-->
+                        <div class="map-detail show">
+                            <div class="slider">
+                                <div class="slideSet">
+                                </div>
                             </div>
+                            <nav>
+                                <ul class="pager">
+                                    <li class="previous slider-prev"><a href="#">前へ</a></li>
+                                    <li class="next slider-next"><a href="#">次へ</a></li>
+                                </ul>
+                            </nav>
                         </div>
                     </div>
                 </div>
-                        マップ表示エリア
-                <div class="display-map">
-                   <div id="map" class="map col-md-6 col-sm-6"></div>
-                   <button id="re-search-btn" class="btn btn-default re-search">再検索をする</button>
-                    
+    <!--                マップ表示-->
+                <div id="display-map" class="hidden-xs">
+                   <div id="map-big" class="map"></div>
+                   <button id="" class="re-search-btn btn btn-default re-search">再検索をする</button>
+
                 </div>
-                
-
             </div>
--->
-
-
         </div>
         
 <!-- ログイン モーダル -->
@@ -402,16 +331,6 @@ $pagetype = strstr($pagetype,'?',true);
     
     var position = "";//マップの拡大縮小のコントローラーのポジション
 
-    // Google Mapで利用する初期設定用の変数
-    //        latlng = new google.maps.LatLng(35.665251, 139.712092);
-    //        opts = {
-    //            zoom: 13,
-    //            mapTypeId: google.maps.MapTypeId.ROADMAP,
-    //            center: latlng,
-    //            disableDefaultUI: true,
-    //        };
-    //        map = new google.maps.Map(document.getElementById("map"), opts);
-
 
     // ジオコードリクエストを送信するGeocoderの作成
     geo = new google.maps.Geocoder();
@@ -441,13 +360,6 @@ $pagetype = strstr($pagetype,'?',true);
             address: address,
         };
         geo.geocode(req, geoResultCallback);
-//        //検索されたら地図表示にする
-//        $("#switching").empty(); 
-//        $("#switching").append(
-//            '<button type="button" class="btn btn-default navbar-btn visible-xs-inline" id="mapbutton">リスト</button>'
-//        ); 
-//        $(".display-map").removeClass("hidden").addClass("show");
-//        $(".display-list").removeClass("show").addClass("hidden");
     }
     //緯度経度取得
     function geoResultCallback(result, status) {
@@ -504,7 +416,6 @@ $pagetype = strstr($pagetype,'?',true);
                 style: google.maps.ZoomControlStyle.LARGE,
                 position: position,
             },
-//            disableDefaultUI: true,
         };
     }
     //データを呼び出し登録されてる地点情報をマーカーで表示
@@ -515,7 +426,6 @@ $pagetype = strstr($pagetype,'?',true);
         var map_sw_lat = bounds.getSouthWest().lat();
         var map_ne_lng = bounds.getNorthEast().lng();
         var map_sw_lng = bounds.getSouthWest().lng();
-//        $(".display-map").removeClass("show").addClass("hidden");
         $.ajax({
             url: "../json/place.php?ne_lat=" + map_ne_lat + "&sw_lat=" + map_sw_lat + "&ne_lng=" + map_ne_lng + "&sw_lng=" + map_sw_lng,
             type: 'GET',
@@ -558,11 +468,6 @@ $pagetype = strstr($pagetype,'?',true);
                     var marker_num = marker_ary.length; //markerを複数作成する際のマーカー番号、配列番号
                     marker_ary[marker_num] = new google.maps.Marker(markerOpts);
 
-//                    //マップ下部のlist表示
-//                    $(".slideSet").append(
-//                        //                            '<div class="slide">' + this.spotname + '</div>'
-//                        '<a href="../spot/index.php?spot_id='+$.htmlspecialchars(this.spot_id)+'"><div class="media slide"><span class="media-left" href="#"><img src="../upload/s/'+this.image_name+'" alt=""></span><div class="media-body"><h4 class="media-heading">' + this.spotname + '</h4></div></div></a>'
-//                    );
                     //list表示
                     if ( this.image_name == null){
                         switch (this.spot_point) {
@@ -929,32 +834,6 @@ $pagetype = strstr($pagetype,'?',true);
         $(".map-detail").removeClass("hidden").addClass("show");
     });
 
-//    //ページの要素のサイズ取得
-//    $(document).ready(function() {
-//        hsize = $(window).height();
-//        wsize = $(window).width();
-//
-//        hsize = hsize - 50;
-//        wsize = wsize - 400;
-//
-//        $(".map").css("height", hsize + "px");
-//        $(".map").css("width", wsize + "px");
-//        $(".list").css("height", hsize + "px");
-//        $(".list").css("width", "400px");
-//        //  $(".heighttest").css("height", hsize + "px");
-//    });
-//    $(window).resize(function() {
-//        hsize = $(window).height();
-//        wsize = $(window).width();
-//
-//        hsize = hsize - 50;
-//        wsize = wsize - 400;
-//
-//        $(".map").css("height", hsize + "px");
-//        $(".map").css("width", wsize + "px");
-//        $(".list").css("height", hsize + "px");
-//        $(".list").css("width", "400px");
-//    });
 //ページの要素のサイズ取得
     $(document).ready(function() {
         var hsize = $(window).height();
@@ -963,9 +842,6 @@ $pagetype = strstr($pagetype,'?',true);
         var H = hsize - 50;
         var W = wsize - 400;
 
-        
-        
-        //  $(".heighttest").css("height", hsize + "px");
         if ( $("#map-big").is(":visible")){
             $("#map-big").css("height", H + "px");
             $("#map-big").css("width", W + "px");
@@ -986,8 +862,6 @@ $pagetype = strstr($pagetype,'?',true);
         var H = hsize - 50;
         var W = wsize - 400;
 
-        
-        
         if ( $("#map-big").is(":visible")){
             $("#map-big").css("height", H + "px");
             $("#map-big").css("width", W + "px");
@@ -1007,22 +881,6 @@ $pagetype = strstr($pagetype,'?',true);
             $(".search-map-button").trigger("click");
         }
     });
-    
-    
-    
-    
-                (function($) {
-                    $.extend({
-                        htmlspecialchars: function htmlspecialchars(ch){
-                                ch = ch.replace(/&/g,"&amp;") ;
-                                ch = ch.replace(/"/g,"&quot;") ;
-                                ch = ch.replace(/'/g,"&#039;") ;
-                                ch = ch.replace(/</g,"&lt;") ;
-                                ch = ch.replace(/>/g,"&gt;") ;
-                                return ch ;
-                            }
-                    });
-                })(jQuery);
 </script>
 
     </body>

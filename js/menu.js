@@ -10,7 +10,6 @@ $("#menu-btn").on("click", function(){
 //画面を閉じるicon
 $(".menu-close span").on("click", function() {
     $('#index-main').show();
-//    $('#menu').attr('style', 'display: none !important;');
     $("#menu").removeClass("show");
     $("#menu").addClass("hidden");
 });

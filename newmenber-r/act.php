@@ -1,12 +1,9 @@
 <?php
 session_start();
 include("../function.php");
-//2. セッションチェック(前ページのSESSION＿IDと現在のsession_idを比較)
-//sessionCheck();//セッションの入れ替え
 
 //2. DB接続します(エラー処理追加)　定番の表現　変更点はDbConnectErrorくらい
 $pdo = db_con();
-
 
 if(empty($_GET)) {
 	header("Location: index.php");
@@ -19,7 +16,6 @@ if(empty($_GET)) {
 		$errors['token'] = "もう一度登録をやりなおして下さい。";
 	}else{
 			//例外処理を投げる（スロー）ようにする
-//			$dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			
 			//未登録者・仮登録日から24時間以内
             $stmt = $pdo->prepare('
@@ -97,7 +93,6 @@ if(empty($_GET)) {
                 }
 
                 //３．抽出データ数を取得
-                //$count = $stmt->fetchColumn(); //SELECT COUNT(*)で使用可能()
                 $val = $stmt->fetch(); //1レコードだけ取得する方法
 
                 //４. 該当レコードがあればSESSIONに値を代入
@@ -108,20 +103,7 @@ if(empty($_GET)) {
                   //logout処理を経由して全画面へ
                   header("Location: index.php");
                 }
-
                 exit();
-
-
-                //    //４．データ登録処理後
-                //if($status==false){
-                //    //SQL実行時にエラーがある場合（エラーオブジェクト取得して表示） 
-                //    db_error($stmt);
-                //}else{
-                //  //５．index.phpへリダイレクト
-                //  header("Location: index.php");
-                //  exit;
-                //}
-				
 			}else{ 
                 //２．仮登録データベース削除
                 $stmt = $pdo->prepare('
@@ -142,6 +124,4 @@ if(empty($_GET)) {
 			$dbh = null;
 	}
 }
-
-
 ?>

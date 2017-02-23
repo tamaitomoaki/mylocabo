@@ -1,18 +1,15 @@
 <?php
 session_start();
 include("../function.php");
-//2. セッションチェック(前ページのSESSION＿IDと現在のsession_idを比較)
-//sessionCheck();//セッションの入れ替え
-
 
 //値を受け取っているか確認
 if(
   !isset($_GET["review_id"]) || $_GET["review_id"]=="" ||
   !isset($_GET["spot_id"]) || $_GET["spot_id"]=="" 
 ){
-//  exit('ParamError');
+
     header("location: ./index.php");
-//    echo "ok";
+
     exit();
 }
 
@@ -20,8 +17,6 @@ $review_id = $_GET["review_id"];
 $spot_id = $_GET["spot_id"];
 $menber_id = $_SESSION["menber_id"];
 
-
- 
 //DB接続
 $pdo = db_con();
 
@@ -40,13 +35,6 @@ if($status==false){
     db_error($stmt);
 } 
 
-
-
-
-
-
 echo $spot_id;
-
-
 
 ?>

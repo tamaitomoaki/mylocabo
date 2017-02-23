@@ -2,33 +2,13 @@
 session_start();
 
 include("../function.php");
-//2. セッションチェック(前ページのSESSION＿IDと現在のsession_idを比較)
+
 sessionCheck();//セッションの入れ替え
-
-
-//$info = var_export($_FILES["image_file"], TRUE);
-
-//$result = array();
-//$result['code'] = 200;
-//$result['info'] = $info;
-////$result['info2'] = $info2;
-//echo json_encode($_FILES["image_file"]);
-
-
-
-//if($_GET["spot_id"]){
-//    $spot_id = $_GET["spot_id"];
-//}else{
-//   $spot_id = $_SESSION["review_spot_id"]; 
-//}
-
-
 
 if(
   !isset($_GET["spot_id"]) || $_GET["spot_id"]=="" 
 )
 {
-  //未記入がある場合、エラー
 
     exit;
 }
@@ -42,16 +22,6 @@ $reviewimg ="";
 $msg = "";
 $arrayimg = array();
 
-
-
-//if($_GET["spot_id"]){
-//    //口コミ編集の場合
-//}else{
-//　　//口コミ作成の場合
-//   //アップロードした画像を登録完了まで保持する
-//    $uploadimg = array();
-//    $uploadimg= $_SESSION["review_img"];
-//}
 //アップロードした画像を登録完了まで保持する
     $uploadimg = array();
     $uploadimg= $_SESSION["review_img"];
@@ -59,9 +29,7 @@ $arrayimg = array();
 // ファイル処理
 // 複数ファイルのアップロード対応
 foreach ($_FILES["upreviewimg"]["error"] as $key => $value) {
-    
-    
-    
+
     // アップロード成功した際の処理
     if (!isset($_FILES["upreviewimg"]["error"][$key]) || !is_int($_FILES["upreviewimg"]["error"][$key]) ){
         //画像複数選択のとき、その数分チェックしているが、その中の１つがエラーの場合どうしよう。
@@ -78,12 +46,6 @@ foreach ($_FILES["upreviewimg"]["error"] as $key => $value) {
                  $reviewimg = $uniq_name;
                  $arrayimg[] = $uniq_name;
                  
-//                 if($_GET["spot_id"]){
-//                     //口コミ編集の場合
-//                }else{
-//                     //口コミ作成の場合
-//                   $uploadimg[] = $uniq_name;
-//                }
                  $uploadimg[] = $uniq_name;
                  //画像をフォルダにアップロード完了、その画像をリサイズしてサムネイルに
                  $file = $uniq_name;
@@ -150,9 +112,7 @@ foreach ($_FILES["upreviewimg"]["error"] as $key => $value) {
                      //4,データ登録処理後 
                      db_error($stmt);
                  } 
-//                 header( "Location: newreview-registration-write.php?test=".$reviewimg );
-        //         header( "Location: newreview-registration-write.php?img=".urlencode($uniq_name) );
-//                 exit; 
+
              } else {
                  echo "Error:. Fileupload OK!!"; 
              } 
@@ -160,15 +120,7 @@ foreach ($_FILES["upreviewimg"]["error"] as $key => $value) {
     }
 }
 
-
-//if($_GET["spot_id"]){
-//    //口コミ編集の場合
-//}else{
-//　　//口コミ作成の場合
-//   $_SESSION["review_img"] = $uploadimg;
-//}
 $_SESSION["review_img"] = $uploadimg;
-//header( "Location: newreview-registration-write.php" );
 echo json_encode($arrayimg);
 exit;
 

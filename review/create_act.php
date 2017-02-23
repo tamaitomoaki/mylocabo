@@ -1,14 +1,7 @@
 <?php
 session_start();
 include("../function.php");
-//2. セッションチェック(前ページのSESSION＿IDと現在のsession_idを比較)
 sessionCheck();//セッションの入れ替え
-
-
-//header("Location: ../mypage/index.php?lat=".$_GET["lat"]."&lng=".$_GET["lng"]);
-//exit();
-
-
 
 //入力チェック(受信確認処理追加)
 //コメントをセッションに入れているので、送られてきていないのでページが必ず戻る
@@ -23,16 +16,6 @@ if(
     header( "Location: ./create.php");
     exit;
 }
- 
-//取得データを変数へ
-//$_SESSION["review_comment"] = $_POST["comment"];
-//$_SESSION["review_point"] = $_POST["point"];
-//$comment = $_SESSION["review_comment"];
-//$point = $_SESSION["review_point"];
-//$menber_id = $_SESSION["menber_id"];
-//$spot_id = $_SESSION["review_spot_id"];
-//$stance = $_SESSION["stance_num"];
-
 
 $time = $_POST["time"];
 $money = $_POST["money"];
@@ -43,10 +26,7 @@ $spot_id = $_GET["spot_id"];
 
 $uploadimg = $_SESSION["review_img"];//画像の名前
 
-
 $tagarray = array();
-
-
 
 //DB接続
 $pdo = db_con();
@@ -131,8 +111,6 @@ if( $_POST["tag"] != "" ){
     }  
 }
 
-
-
 //DB接続
 $pdo = db_con();
 
@@ -154,9 +132,6 @@ if($status==false){
     db_error($stmt);
 }
 
-
-
-
 //口コミを書いたスポットの情報を取得,マイページでスポットをクローズアップする
 $stmt = $pdo->prepare("
 SELECT lat, lng
@@ -172,20 +147,6 @@ if($status==false){
 }
 $val = $stmt->fetch(); //1レコードだけ取得する方法
 
-
-
-
-
-
-
-
-
-////口コミ投稿時にセットした変数を破棄
-//unset($_SESSION["review_spot_id"],
-//      $_SESSION["review_spotname"],
-//      $_SESSION["review_comment"],
-//      $_SESSION["review_point"]
-//     ); 
 $_SESSION["review_img"] = 0;
 header("Location: ../mypage/index.php?lat=".$val["lat"]."&lng=".$val["lng"]);
 exit;

@@ -6,9 +6,7 @@ include("../function.php");
 if(
   !isset($_GET["menber_id"]) || $_GET["menber_id"]=="" 
 ){
-//  exit('ParamError');
     header("location: ./index.php");
-//    echo "ok";
     exit();
 }
 
@@ -17,8 +15,6 @@ $menber_id = $_GET["menber_id"];
 $menber_id = str_replace("menber", "", $menber_id);
 
 $pdo = db_con();
-
-
 
 $stmt = $pdo->prepare("
 SELECT A.review_id, A.comment, B.spot_id, B.spotname, C.name, C.introduction 
@@ -32,12 +28,7 @@ $stmt->bindValue(':a1', $menber_id,   PDO::PARAM_INT);  //Integer（数値の場
 
 $status = $stmt->execute();
 
-
-//$val = $stmt->fetch();
 $result = $stmt->fetchAll();
-
-
-
 
 echo json_encode( $result );
 ?>

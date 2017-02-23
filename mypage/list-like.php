@@ -5,17 +5,13 @@ include("../function.php");
 if(
   !isset($_GET["menber_id"]) || $_GET["menber_id"]=="" 
 ){
-//  exit('ParamError');
     header("location: ./index.php");
-//    echo "ok";
     exit();
 }
 
 $menber_id = $_GET["menber_id"];
 
 $pdo = db_con();
-
-
 
 $stmt = $pdo->prepare("
 SELECT  B.review_id, B.review_point, C.spot_id, C.spotname, C.address, C.spot_point, D.image_name, E.images_name
@@ -43,8 +39,6 @@ $reviewlist = array();
 while( $result = $stmt->fetch(PDO::FETCH_ASSOC)){
     $reviewlist[] = $result;
 }
-
-
 
 echo json_encode( $reviewlist );
 

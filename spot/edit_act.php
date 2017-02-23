@@ -1,15 +1,6 @@
 <?php
 session_start();
 include("../function.php");
-//2. セッションチェック(前ページのSESSION＿IDと現在のsession_idを比較)
-//sessionCheck();//セッションの入れ替え
-
-
-//echo json_encode($_GET["id"]);
-//echo json_encode($_GET["id"]);
-//var_dump($_GET["data"]);
-//var_dump($_GET["id"]);
-//exit();
 
 //入力チェック(受信確認処理追加)
 //コメントをセッションに入れているので、送られてきていないのでページが必ず戻る
@@ -42,14 +33,6 @@ if ( isset($_GET["data2"]) ){
     }
     
 }
-
-
-
-
-
-
-
-
 
 
 //DB接続

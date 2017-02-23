@@ -1,7 +1,6 @@
 <?php
 session_start();
 include("../function.php");
-//2. セッションチェック(前ページのSESSION＿IDと現在のsession_idを比較)
 sessionCheck();//セッションの入れ替え
 
 $spot_id = $_GET["spot_id"];
@@ -31,9 +30,6 @@ $spotname = $val["spotname"];
 $menber_id = $_SESSION["menber_id"];
 $name = $_SESSION["name"];
 
-
-
-
 ?>
     <!DOCTYPE html>
     <html lang="ja">
@@ -51,7 +47,7 @@ $name = $_SESSION["name"];
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         <!-- BootstrapのJS読み込み -->
         <script src="../js/bootstrap.js"></script>
-        <style>
+    <style>
         .mypage-header {
             color: white;
             background: #444444;
@@ -73,12 +69,12 @@ $name = $_SESSION["name"];
         </nav>
     </div>
     <!-- /container -->
-<div class="mypage-header">
-    <div class="container">
-        <?=$name?>
+    <div class="mypage-header">
+        <div class="container">
+            <?=$name?>
+        </div>
+
     </div>
-    
-</div>
     <div class="container">
         <div class="row">
             <div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
@@ -96,28 +92,6 @@ $name = $_SESSION["name"];
                         <br> 作り上げましょう！！
                     </h3>
                 </div>
-
-
-
-                <!--
-                    <h3><strong>口コミを投稿しましょう！</strong></h3>
-                    <h4><?=$name?>さんの口コミがみんなの参考になります。いろいろと教えてください！</h4>
-                    <p class="lead">口コミを書く</p>
--->
-
-                <!--
-
-                   <div class="edit">
-                       <p class="icon-edit"></p>
-                       <div></div>
-                       <h3><strong>さらに詳細をご存知ですか？</strong></h3>
-                    <h4>他にもあると便利な情報があります。より豊富な情報を共有しましょう！</h4>
-                    <p class="lead">編集する</p>
-                   </div>
--->
-
-
-
                 <a class="list-group-item nonborder" href="../review/create.php?spot_id=<?=$spot_id?>">
                     <div class="media border-round">
                         <span class="media-left  media-middle" href="#">
@@ -147,14 +121,9 @@ $name = $_SESSION["name"];
                         </div>
                     </div>
                 </a>
-
-
-
-
             </div>
         </div>
     </div>
-
 </body>
 
-    </html>
+</html>

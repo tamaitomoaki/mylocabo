@@ -1,8 +1,6 @@
 <?php
 session_start();
 include("../function.php");
-//2. セッションチェック(前ページのSESSION＿IDと現在のsession_idを比較)
-//sessionCheck();//セッションの入れ替え
 
 //入力チェック(受信確認処理追加)
 if(
@@ -14,7 +12,6 @@ if(
 }
 
 //パスワードのバリデーション
-
 
 if ( !preg_match('/\A[0-9a-zA-Z]{8,12}\Z/', $_POST["password"]) ){
     header("Location: index.php");
@@ -29,32 +26,6 @@ if(!filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)){
     exit();
 }
 $pdo = db_con();
-////メールアドレスが登録済みかどうか
-//$stmt = $pdo->prepare('
-//SELECT menber_id 
-//FROM menber_table
-//WHERE email = :a1
-//');
-//$stmt->bindValue(':a1', $_POST["email"],   PDO::PARAM_STR);
-//$res = $stmt->execute();
-//$val = $stmt->fetch();
-////SQL実行時にエラーがある場合
-//if($res==false){
-//  db_error($stmt);
-//}
-////すでに同じユーザ名が存在すれば、登録済みのメッセージを出すためのものである。
-//if($val){
-////   "すでに登録済みのメールアドレスです。もう一度別の名前で登録してください。<br>";
-//    header("Location: login-already.php?email=".$_POST["email"]);
-//    exit();
-//}
-
-
-
-
-
-
-
 
 $name  = strstr($_POST["email"], "@" , TRUE);
 $email  = $_POST["email"];

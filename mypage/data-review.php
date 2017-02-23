@@ -5,19 +5,11 @@ include("../function.php");
 if(
   !isset($_GET["review_id"]) || $_GET["review_id"]=="" 
 ){
-//  exit('ParamError');
     header("location: ./index.php");
-//    echo "ok";
     exit();
 }
-
 $review_id = $_GET["review_id"];
-
-//$review_id = str_replace("review", "", $review_id);
-
 $pdo = db_con();
-
-
 
 $stmt = $pdo->prepare("
 SELECT  A.review_id, A.time, A.money, A.comment, A.D_point, A.L_point, A.spot_id, A.menber_id, A.review_point, B.images_name, C.spotname, D.menber_id, D.name,D.profileimg, E.tag_id, E.tag_review_map_ids, E.tags_name  
@@ -46,12 +38,8 @@ if($status==false){
     db_error($stmt);
 }
 
-
-
 $result = $stmt->fetch();
 
-
-//$result["comment"] = nl2br($result["comment"]);
 
 if( $result["images_name"] == false){
     $result["images_name"] = "";

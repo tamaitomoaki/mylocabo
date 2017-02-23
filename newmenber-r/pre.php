@@ -1,12 +1,7 @@
 <?php
 session_start();
 include("../function.php");
-//2. セッションチェック(前ページのSESSION＿IDと現在のsession_idを比較)
-//sessionCheck();//セッションの入れ替え
 ?>
-
-
-
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -23,22 +18,6 @@ include("../function.php");
     <!-- BootstrapのJS読み込み -->
     <script src="../js/bootstrap.js"></script>
     <style>
-        /*スタンスの違いを表す色*/
-        
-        .marker_yellow_hoso {
-            background: linear-gradient(transparent 60%, #ffff66 60%);
-            color: #545454;
-        }
-        
-        .marker_red_hoso {
-            background: linear-gradient(transparent 60%, #ff7466 60%);
-            color: #545454;
-        }
-        
-        .marker_green_hoso {
-            background: linear-gradient(transparent 60%, #ceff66 60%);
-            color: #545454;
-        }
         /*    モーダルのデザイン*/
         
         .modal-footer {
@@ -68,8 +47,6 @@ include("../function.php");
                 
             </div>
         </div>
-    </div>
-
-       
+    </div>   
 </body>
 </html>

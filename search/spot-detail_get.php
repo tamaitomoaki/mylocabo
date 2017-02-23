@@ -8,8 +8,6 @@ $spot_id = str_replace("spot", "", $spot_id);
 
 $pdo = db_con();
 
-
-
 $stmt = $pdo->prepare("
 SELECT A.review_id, A.comment, B.name, C.spotname, C.address
 FROM review_table AS A
@@ -23,11 +21,7 @@ $stmt->bindValue(':a1', $spot_id,   PDO::PARAM_INT);  //Integer（数値の場�
 $status = $stmt->execute();
 
 
-//$val = $stmt->fetch();
 $result = $stmt->fetchAll();
-
-
-
 
 echo json_encode( $result );
 ?>

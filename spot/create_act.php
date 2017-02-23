@@ -1,7 +1,6 @@
 <?php
 session_start();
 include("../function.php");
-//2. セッションチェック(前ページのSESSION＿IDと現在のsession_idを比較)
 sessionCheck();//セッションの入れ替え
 
 //入力チェック(受信確認処理追加)
@@ -83,19 +82,6 @@ $pdo = db_con();
     //4,データ登録処理後
         db_error($stmt);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     header("Location: create-after.php?spot_id=".$spot_id );
     exit;

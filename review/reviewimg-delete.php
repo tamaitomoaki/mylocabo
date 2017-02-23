@@ -1,6 +1,4 @@
 <?php
-
-
 session_start();
 
 include("../function.php");
@@ -13,10 +11,6 @@ $image_name = substr($_GET["image_name"],12);
 
 $uploadimg = array();
 $uploadimg = $_SESSION["review_img"];
-
-////var_dump($uploadimg);
-//var_dump($image_name);
-//exit();
 
 $result = array_diff($uploadimg, array($image_name));//配列を比較して重複しているものだけ出力
 $_SESSION["review_img"] = array_values($result);//indexを詰める
@@ -42,7 +36,5 @@ unlink("../upload/s/".$image_name);
 //header("Location: newreview-registration-write.php");
 echo json_encode($_SESSION["review_img"]);
 exit;
-
-
 
 ?>

@@ -1,16 +1,12 @@
 <?php
 session_start();
 include("../function.php");
-//2. セッションチェック(前ページのSESSION＿IDと現在のsession_idを比較)
-//sessionCheck();//セッションの入れ替え
 
 //値を受け取っているか確認
 if(
   !isset($_SESSION["menber_id"]) || $_SESSION["menber_id"]=="" 
 ){
-//  exit('ParamError');
     header("location: ../index.php");
-//    echo "ok";
     exit();
 }
 

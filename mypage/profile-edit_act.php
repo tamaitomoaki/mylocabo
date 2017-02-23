@@ -1,23 +1,13 @@
 <?php
 session_start();
 include("../function.php");
-//2. セッションチェック(前ページのSESSION＿IDと現在のsession_idを比較)
-//sessionCheck();//セッションの入れ替え
 
-
-//echo json_encode($_POST["data"]);
-//echo json_encode($_POST["id"]);
-//echo json_encode($_POST["menber_id"]);
-////var_dump($_POST["data"]);
-////var_dump($_POST["id"]);
-//exit();
 //入力チェック(受信確認処理追加)
 //コメントをセッションに入れているので、送られてきていないのでページが必ず戻る
 if(
   !isset($_POST["data"]) || $_POST["data"]==""
 )
 {
-  //未記入がある場合、エラー
     echo json_encode("データが渡すことが出来ていません。");
     exit;
 }
@@ -25,7 +15,6 @@ if(
   !isset($_POST["id"]) || $_POST["id"]==""
 )
 {
-  //未記入がある場合、エラー
     echo json_encode("正しくクリック出来ていません。");
     exit;
 }
@@ -113,13 +102,9 @@ switch ($_POST["id"]) {
                 db_error($stmt);
             }
         $_SESSION["introduction"] = $_POST["data"];
-//        echo $_POST["data"];
-//        echo json_encode($_POST["data"]);
-//        echo json_encode(nl2br($_POST["data"]));
         echo json_encode(nl2br(h($_POST["data"])));
         break;
 }
 exit();
-
 
 ?>

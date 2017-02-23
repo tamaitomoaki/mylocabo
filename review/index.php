@@ -1,8 +1,6 @@
 <?php
 session_start();
 include("../function.php");
-//2. セッションチェック(前ページのSESSION＿IDと現在のsession_idを比較)
-//sessionCheck();//セッションの入れ替え
 
 
 //入力チェック(受信確認処理追加)
@@ -145,421 +143,348 @@ $pagetype =  $_SERVER["REQUEST_URI"];
     <!-- BootstrapのJS読み込み -->
     <script src="../js/bootstrap.js"></script>
     <style>
-/*
-        .content-review{
-            margin-top:70px;
-        }
-*/
-/*
-        .list-group-item{
-    border:none;
-    padding:0px;
-    margin:0 20px;
+        /*        名前のボジション*/
 
-}
-*/
-/*        名前のボジション*/
-.position-name{
-        vertical-align: middle;
-    }
-/*レビューページーーーーーーーーーー*/
-.reviewpage-name{
-    font-size:20px;
-    color:#545454;
-}
-.reviewpage-stance{
-    color:gray;
-    font-size:13px;
-    font-weight:100;
-}
-.reviewpage-spotname{
-    padding: 20px 0px;
-}
-.reviewpage-spotname div{
-    font-weight: bold;
-    font-size: 20px;
-    color:#545454;
-}
-        .reviewpage-spotname p{
-            color:gray;
-            margin-bottom:0px;
+        .position-name {
+            vertical-align: middle;
         }
-.reviewpage-image{
-    padding:0px;
-}
-.content-review .media{
-    padding:20px 0px;
-}
-        
-.review-footer{
-/*    margin:0 20px;*/
-    margin-top:20px;
-    padding-top:20px;
-    padding-bottom:20px;
-    background:#fbfbfb;
-    border-radius:0px;
-}
-        
-        
-        
-        
-/* 投票システム       */
-.point{
-    color:gray;
-    padding-bottom:5px;
-    text-align: left;
-}
-.share{
-    width: 50px;
-/*    width: 16vw;*/
-    display: inline-block;
-    color: gray;
-    margin: 0 6vw;
-}
-.share i{
-    font-size:30px;
-}
-.dld{
-    font-size:10px;
-/*    font-size:1vw;*/
-    color: #737373;
-    display: block;
-    margin-top: 2px;
-    font-weight: bold;
-}
-.on{
-    color: #ffd800;
-    
-}
-/*
-.reviewimg-select{
-    color:#676262;
-    padding: 0px;
-    width: 16.2vw;
-    margin: 0px;
-    height: 16.2vw;
-}
-.imgform{
-    display:none;
-}
-.uploadimgarea{
-    padding-top:10px;
-}
-.r-img{
-    width:16.2vw;
-    margin-bottom:1vw;
-    margin-left:0.5vw;
-    margin-right:0.5vw;
-}
-*/
-        
-        .tach:hover{
-           background-color:#f5f5f5;
+        /*レビューページーーーーーーーーーー*/
+
+        .reviewpage-name {
+            font-size: 20px;
+            color: #545454;
+        }
+
+        .reviewpage-stance {
+            color: gray;
+            font-size: 13px;
+            font-weight: 100;
+        }
+
+        .reviewpage-spotname {
+            padding: 20px 0px;
+        }
+
+        .reviewpage-spotname div {
+            font-weight: bold;
+            font-size: 20px;
+            color: #545454;
+        }
+
+        .reviewpage-spotname p {
+            color: gray;
+            margin-bottom: 0px;
+        }
+
+        .reviewpage-image {
+            padding: 0px;
+        }
+
+        .content-review .media {
+            padding: 20px 0px;
+        }
+
+        .review-footer {
+            /*    margin:0 20px;*/
+            margin-top: 20px;
+            padding-top: 20px;
+            padding-bottom: 20px;
+            background: #fbfbfb;
+            border-radius: 0px;
+        }
+        /* 投票システム       */
+
+        .point {
+            color: gray;
+            padding-bottom: 5px;
+            text-align: left;
+        }
+
+        .share {
+            width: 50px;
+            /*    width: 16vw;*/
+            display: inline-block;
+            color: gray;
+            margin: 0 6vw;
+        }
+
+        .share i {
+            font-size: 30px;
+        }
+
+        .dld {
+            font-size: 10px;
+            /*    font-size:1vw;*/
+            color: #737373;
+            display: block;
+            margin-top: 2px;
+            font-weight: bold;
+        }
+
+        .on {
+            color: #ffd800;
+        }
+
+        .tach:hover {
+            background-color: #f5f5f5;
             text-decoration: none;
         }
-        .hrcostom{
-            margin:0px;
+
+        .hrcostom {
+            margin: 0px;
         }
-        
+
         .prof-img-size {
-        width: 50px;
-    }
-        
-        
-
-
-
-/*スペース管理*/
-        .space-pc{
-            height:70px;
+            width: 50px;
         }
-        .spance-ad{
-            height:70px;
-        }
-        
+        /*スペース管理*/
 
-        
-        a:link{
-   
-        } 
-        a:visited{
- 
-        } 
-        a:hover{
-
-            text-decoration: none ;
-        } 
-        a:active{
-
-        }
-/*        画像リストのサイズ*/
-        .reviewpageimg-size{
-            width:33.3%;
-            padding:0.9%;
-        }
-        .review-name{
-            color:#484848;
-        }
-        .reviewpage-comment{
-            font-size:18px;
+        .space-pc {
+            height: 70px;
         }
 
-
-/*レビュー星のcss*/
-                .review-data{
-            font-size:18px;
-            margin:20px 0px;
+        .spance-ad {
+            height: 70px;
         }
-        .review-data p{
-            margin-bottom:0px;
+
+        a:link {}
+
+        a:visited {}
+
+        a:hover {
+            text-decoration: none;
+        }
+
+        a:active {}
+        /*        画像リストのサイズ*/
+
+        .reviewpageimg-size {
+            width: 33.3%;
+            padding: 0.9%;
+        }
+
+        .review-name {
+            color: #484848;
+        }
+
+        .reviewpage-comment {
+            font-size: 18px;
+        }
+        /*レビュー星のcss*/
+
+        .review-data {
+            font-size: 18px;
+            margin: 20px 0px;
+        }
+
+        .review-data p {
+            margin-bottom: 0px;
             display: inline-block;
             vertical-align: text-top;
-            font-size:14px;
-            color:gray;
-        }
-        .review-data .review-point{
-            color:#EB6E00;
-/*            color:#e10000;*/
-            font-size:20px;
-            vertical-align: bottom;
-        }
-        .review-data .nocolor{
-            color:#d2d2d2;
-        }
-        .review-data .color{
-            color:#EB6E00;
+            font-size: 14px;
+            color: gray;
         }
 
-/*
-        .review-data .nocolor{
-            color:#d2d2d2;
+        .review-data .review-point {
+            color: #EB6E00;
+            /*            color:#e10000;*/
+            font-size: 20px;
+            vertical-align: bottom;
         }
-        .review-data .color{
-            color:#EB6E00;
+
+        .review-data .nocolor {
+            color: #d2d2d2;
         }
-*/
-/*        画像フォーカス時のcss*/
-        #imageModal .modal-body img{
-            width:100%;
+
+        .review-data .color {
+            color: #EB6E00;
         }
-        #imageModal .modal-body{
-            padding:0px;
+        /*        画像フォーカス時のcss*/
+
+        #imageModal .modal-body img {
+            width: 100%;
         }
-        #imageModal .modal-dialog{
-            margin-top:20vh;
+
+        #imageModal .modal-body {
+            padding: 0px;
         }
-/*        画像モーダル時のcss*/
-        .review-image-list{
-            width:100%;
-            margin-bottom:20px;
+
+        #imageModal .modal-dialog {
+            margin-top: 20vh;
         }
-        .modal-images-focus{
-            padding:0px;
-        
+        /*        画像モーダル時のcss*/
+
+        .review-image-list {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .modal-images-focus {
+            padding: 0px;
         }
         /*画像リスト時、フォーカス時のheader        */
+
         .modal-images-list-header button,
-        .modal-images-focus-header button{
-            font-size:30px;
-            color:#717171;
-            border:none;
-            width:100%;
-            height:10vh;
-/*            border-bottom:1px solid #ececec;*/
-/*            border-radius: 0px;*/
-            padding:0px;
-/*            background: #ececec;*/
+        .modal-images-focus-header button {
+            font-size: 30px;
+            color: #717171;
+            border: none;
+            width: 100%;
+            height: 10vh;
+            padding: 0px;
         }
-        .modal-close{
-            padding:0 15px;
+
+        .modal-close {
+            padding: 0 15px;
         }
-        .modal-close:hover{
+
+        .modal-close:hover {
             color:
         }
-        .modal-close button:hover{
-            background:none;
+
+        .modal-close button:hover {
+            background: none;
         }
+
         .modal-images-list-header,
-        .modal-images-focus-header{
-            padding:0px;
-            border:none;
+        .modal-images-focus-header {
+            padding: 0px;
+            border: none;
         }
         /*画像リスト時のbody        */
-        .modal-images-list{
-            height:80vh;
-            padding:0px;
+
+        .modal-images-list {
+            height: 80vh;
+            padding: 0px;
             overflow: scroll;
             width: 100%;
             vertical-align: middle;
             display: table-cell;
         }
         /*画像フォーカス時のbody        */
-        .modal-images-focus{
-            height:71vh;
+
+        .modal-images-focus {
+            height: 71vh;
             overflow: hidden;
-            padding:0px;
+            padding: 0px;
         }
-        
         /*画像リスト時のfooter        */
-        .modal-images-list-footer{
-            height:10vh;
+
+        .modal-images-list-footer {
+            height: 10vh;
         }
         /*画像フォーカス時のfooter        */
-        .modal-images-focus-footer{
-            padding:0px;
-            border:none;
-            background:#fbfbfb;
-            border-top:1px solid #f5f5f5;
-            border-radius:4px;
+
+        .modal-images-focus-footer {
+            padding: 0px;
+            border: none;
+            background: #fbfbfb;
+            border-top: 1px solid #f5f5f5;
+            border-radius: 4px;
         }
-        .modal-dialog .modal-content .modal-images-focus-footer button{
-            font-size:20px;
-            color:#717171;
+
+        .modal-dialog .modal-content .modal-images-focus-footer button {
+            font-size: 20px;
+            color: #717171;
             width: 49%;
             margin: 0px;
             border: none;
-/*            border-top: 1px solid #ececec;*/
             height: 9vh;
-/*            border-radius: 0px;*/
-            padding:0px;
+            padding: 0px;
             background: rgba(236, 236, 236, 0);
-/*
-            width:50%;
-            padding:0px;
-            border:none;
-*/
         }
         /*画像focus時の画像の位置修正*/
-        .free_Box{
-            width:100%;
-            height:71vh;
+
+        .free_Box {
+            width: 100%;
+            height: 71vh;
             vertical-align: middle;
             display: table-cell;
         }
-        .free_Box img{
-            width:100%;
+
+        .free_Box img {
+            width: 100%;
         }
-        .item{
+
+        .item {
             text-align: -webkit-center;
         }
-        
-        
-        
-        
-/*ログインモーダルのズレを修正*/
+        /*ログインモーダルのズレを修正*/
+
         .modal-open {
             overflow: auto;
         }
-      </style>
+    </style>
   </head>
 <body>
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
+
     <!-- container -->
-<div id="index-main">
-    <nav class="navbar navbar-default navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="../index.php">マイロカボ</a>
-                <!--メニューボタン-->
-                <?php include( '../External/menu-btn-small.php'); ?>
+    <div id="index-main">
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="../index.php">マイロカボ</a>
+                    <!--メニューボタン-->
+                    <?php include( '../External/menu-btn-small.php'); ?>
+                </div>
+
+                <!--PCデバイス時のメニューボタン-->
+                <?php include( '../External/menu-btn-large.php'); ?>
+                <!--/.navbar-collapse -->
             </div>
-         
-            <!--PCデバイス時のメニューボタン-->
-            <?php include( '../External/menu-btn-large.php'); ?>
-            <!--/.navbar-collapse -->
-        </div>
-    </nav>
-    <div class="container">
-    <!-- Example row of columns -->
-    <div class="space-pc hidden-xs"></div>
-    <div class="content-review row">
-        <div class="col-sm-7 col-md-5 col-md-offset-2 col-lg-5 col-lg-offset-2">
-            <!--  メインコンテンツ-->
-            <div class="tach" href="">
-               <a href="../menber/index.php?menber_id=<?=h($menber_id)?>">
-                <div class="media">
-                    <span class="media-left">
-                    <img src='../img/profileimg/<?=h($profileimg)?>' alt='' class='prof-img-size img-circle'>
-                    </span>
-                    <div class="media-body position-name">
-<?php
-//    switch ($stance){
-//        case 1:
-//                    echo "\t\t\t<h4 class='media-heading'><spna class='marker_red_hoso'>".h($name)."</span></h4>\n";
-//                    break;
-//                case 2:
-//                    echo "\t\t\t<h4 class='media-heading'><span class='marker_yellow_hoso'>".h($name)."</span></h4>\n";
-//                    break;
-//                case 3:
-//                    echo "\t\t\t<h4 class='media-heading'><span class='marker_green_hoso'>".h($name)."</span></h4>\n";
-//                    break;
-//    }
-    echo "\t\t\t<h4 class='review-name'>".h($name)."</h4>\n";
-?>
+        </nav>
+            <div class="container">
+            <!-- Example row of columns -->
+            <div class="space-pc hidden-xs"></div>
+            <div class="content-review row">
+                <div class="col-sm-7 col-md-5 col-md-offset-2 col-lg-5 col-lg-offset-2">
+                    <!--  メインコンテンツ-->
+                    <div class="tach" href="">
+                       <a href="../menber/index.php?menber_id=<?=h($menber_id)?>">
+                        <div class="media">
+                            <span class="media-left">
+                            <img src='../img/profileimg/<?=h($profileimg)?>' alt='' class='prof-img-size img-circle'>
+                            </span>
+                            <div class="media-body position-name">
+<?php echo "\t\t\t<h4 class='review-name'>".h($name)."</h4>\n";?>
+                            </div>
+                        </div>
+                        </a>
                     </div>
-                </div>
-                </a>
-            </div>
-            <hr class="hrcostom">
-            <div class="main">
-               <a href="../spot/index.php?spot_id=<?=h($spot_id)?>">
-                <div class="tach reviewpage-spotname">
-                    <div class=""><?=h($spotname)?></div>
-                    <p><?=h($category)?></p>
-                </div>
-                </a>
-                <hr class="hrcostom">
-                <div class="review-data">
-                <?php
-        switch ($review_point_icon) {
-                case 1:
-                    echo "\t\t\t<span class='glyphicon glyphicon-star color' aria-hidden='true'></span><span class='glyphicon glyphicon-star nocolor' aria-hidden='true'></span><span class='glyphicon glyphicon-star nocolor' aria-hidden='true'></span><span class='glyphicon glyphicon-star nocolor' aria-hidden='true'></span><span class='glyphicon glyphicon-star nocolor' aria-hidden='true'></span>\n";
-                    break;
-                case 2:
-                    echo "\t\t\t<span class='glyphicon glyphicon-star color' aria-hidden='true'></span><span class='glyphicon glyphicon-star color' aria-hidden='true'></span><span class='glyphicon glyphicon-star nocolor' aria-hidden='true'></span><span class='glyphicon glyphicon-star nocolor' aria-hidden='true'></span><span class='glyphicon glyphicon-star nocolor' aria-hidden='true'></span>\n";
-                    break;
-                case 3:
-                    echo "\t\t\t<span class='glyphicon glyphicon-star color' aria-hidden='true'></span><span class='glyphicon glyphicon-star color' aria-hidden='true'></span><span class='glyphicon glyphicon-star color' aria-hidden='true'></span><span class='glyphicon glyphicon-star nocolor' aria-hidden='true'></span><span class='glyphicon glyphicon-star nocolor' aria-hidden='true'></span>\n";
-                    break;
-                case 4:
-                    echo "\t\t\t<span class='glyphicon glyphicon-star color' aria-hidden='true'></span><span class='glyphicon glyphicon-star color' aria-hidden='true'></span><span class='glyphicon glyphicon-star color' aria-hidden='true'></span><span class='glyphicon glyphicon-star color' aria-hidden='true'></span><span class='glyphicon glyphicon-star nocolor' aria-hidden='true'></span>\n";
-                    break;
-                case 5:
-                    echo "\t\t\t<span class='glyphicon glyphicon-star color' aria-hidden='true'></span><span class='glyphicon glyphicon-star color' aria-hidden='true'></span><span class='glyphicon glyphicon-star color' aria-hidden='true'></span><span class='glyphicon glyphicon-star color' aria-hidden='true'></span><span class='glyphicon glyphicon-star color' aria-hidden='true'></span>\n";
-                    break;
-                default:
-                    echo "\t\t\t<span class='glyphicon glyphicon-star' aria-hidden='true'></span><span class='glyphicon glyphicon-star' aria-hidden='true'></span><span class='glyphicon glyphicon-star' aria-hidden='true'></span><span class='glyphicon glyphicon-star' aria-hidden='true'></span><span class='glyphicon glyphicon-star' aria-hidden='true'></span>\n";
-            }
-                  echo "\t\t\t<p class='review-point'>".h($review_point)."</p>\n";
-                              echo "\t\t\t<p>　".h($time)." / ".h($money)."</p>\n";
-    ?>
-    </div>
+                    <hr class="hrcostom">
+                    <div class="main">
+                       <a href="../spot/index.php?spot_id=<?=h($spot_id)?>">
+                        <div class="tach reviewpage-spotname">
+                            <div class=""><?=h($spotname)?></div>
+                            <p><?=h($category)?></p>
+                        </div>
+                        </a>
+                        <hr class="hrcostom">
+                        <div class="review-data">
+<?php
+    switch ($review_point_icon) {
+            case 1:
+                echo "\t\t\t<span class='glyphicon glyphicon-star color' aria-hidden='true'></span><span class='glyphicon glyphicon-star nocolor' aria-hidden='true'></span><span class='glyphicon glyphicon-star nocolor' aria-hidden='true'></span><span class='glyphicon glyphicon-star nocolor' aria-hidden='true'></span><span class='glyphicon glyphicon-star nocolor' aria-hidden='true'></span>\n";
+                break;
+            case 2:
+                echo "\t\t\t<span class='glyphicon glyphicon-star color' aria-hidden='true'></span><span class='glyphicon glyphicon-star color' aria-hidden='true'></span><span class='glyphicon glyphicon-star nocolor' aria-hidden='true'></span><span class='glyphicon glyphicon-star nocolor' aria-hidden='true'></span><span class='glyphicon glyphicon-star nocolor' aria-hidden='true'></span>\n";
+                break;
+            case 3:
+                echo "\t\t\t<span class='glyphicon glyphicon-star color' aria-hidden='true'></span><span class='glyphicon glyphicon-star color' aria-hidden='true'></span><span class='glyphicon glyphicon-star color' aria-hidden='true'></span><span class='glyphicon glyphicon-star nocolor' aria-hidden='true'></span><span class='glyphicon glyphicon-star nocolor' aria-hidden='true'></span>\n";
+                break;
+            case 4:
+                echo "\t\t\t<span class='glyphicon glyphicon-star color' aria-hidden='true'></span><span class='glyphicon glyphicon-star color' aria-hidden='true'></span><span class='glyphicon glyphicon-star color' aria-hidden='true'></span><span class='glyphicon glyphicon-star color' aria-hidden='true'></span><span class='glyphicon glyphicon-star nocolor' aria-hidden='true'></span>\n";
+                break;
+            case 5:
+                echo "\t\t\t<span class='glyphicon glyphicon-star color' aria-hidden='true'></span><span class='glyphicon glyphicon-star color' aria-hidden='true'></span><span class='glyphicon glyphicon-star color' aria-hidden='true'></span><span class='glyphicon glyphicon-star color' aria-hidden='true'></span><span class='glyphicon glyphicon-star color' aria-hidden='true'></span>\n";
+                break;
+            default:
+                echo "\t\t\t<span class='glyphicon glyphicon-star' aria-hidden='true'></span><span class='glyphicon glyphicon-star' aria-hidden='true'></span><span class='glyphicon glyphicon-star' aria-hidden='true'></span><span class='glyphicon glyphicon-star' aria-hidden='true'></span><span class='glyphicon glyphicon-star' aria-hidden='true'></span>\n";
+    }
+    echo "\t\t\t<p class='review-point'>".h($review_point)."</p>\n";
+    echo "\t\t\t<p>　".h($time)." / ".h($money)."</p>\n";
+?>
+                        </div>
 <!--         画像がない場合-->
 <?php if( $reviewimg == ""):?>
 <!--         画像がある場合-->
@@ -568,37 +493,20 @@ $pagetype =  $_SERVER["REQUEST_URI"];
         <?=$reviewimg?>
     </p>
 <?php endif;?>
-
-                
-                <p class="reviewpage-comment">
-                    <?=$comment?>
-                </p>
-                <p class="tagarea"><?=h($tag)?></p>
-                <div class="point">
-                    <i class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></i>
-                    <span class="ico_heart D<?=h($review_id)?>"><?=h($D_point)?></span>
-                    <i class="glyphicon glyphicon-star-empty" aria-hidden="true"></i>
-                    <span class="ico_heart L<?=h($review_id)?>"><?=h($L_point)?></span>
-                    <div class='small pull-right'>2016/07/24</div>
-                </div>
-                
-            </div>
-            
-            
-            
-
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
+                        <p class="reviewpage-comment">
+                            <?=$comment?>
+                        </p>
+                        <p class="tagarea"><?=h($tag)?></p>
+                        <div class="point">
+                            <i class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></i>
+                            <span class="ico_heart D<?=h($review_id)?>"><?=h($D_point)?></span>
+                            <i class="glyphicon glyphicon-star-empty" aria-hidden="true"></i>
+                            <span class="ico_heart L<?=h($review_id)?>"><?=h($L_point)?></span>
+                            <div class='small pull-right'>2016/07/24</div>
+                        </div>
+                    </div>
 <!--  投票部分          -->
-            <div class="review-footer text-center">
+                    <div class="review-footer text-center">
 <!--ログアウト時-->
 <?php if( !isset($_SESSION["chk_ssid"]) || $_SESSION["chk_ssid"]=="" ) : ?>
 <p class="share" data-toggle="modal" data-target="#loginModal2">
@@ -607,11 +515,6 @@ $pagetype =  $_SERVER["REQUEST_URI"];
 <p class="share" data-toggle="modal" data-target="#sampleModal2">
     <i class="glyphicon glyphicon-star-empty" aria-hidden="true"><span class="dld">お気に入り</span></i>
 </p>
-
-       
-       
-       
-        
 <!--ログイン時-->
 <?php else : ?>
 <!--         すでにいいね！済みの場合、-->
@@ -640,42 +543,27 @@ $pagetype =  $_SERVER["REQUEST_URI"];
 
 
 <?php endif; ?>
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-
-            </div>
-<!--                   投票部分終了-->
-                    
-            
-        </div>
-        <div class="col-sm-5 col-md-3  col-lg-3">
-           <div class="spance-ad visible-xs-block"></div>
-            <div class="ad list-group">
-                <a href="#" class="list-group-item active">Link</a>
-                <a href="#" class="list-group-item">Link</a>
-                <a href="#" class="list-group-item">Link</a>
-                <a href="#" class="list-group-item">Link</a>
-                <a href="#" class="list-group-item">Link</a>
-                <a href="#" class="list-group-item">Link</a>
-                <a href="#" class="list-group-item">Link</a>
-                <a href="#" class="list-group-item">Link</a>
-                <a href="#" class="list-group-item">Link</a>
-                <a href="#" class="list-group-item">Link</a>
+                    </div>
+        <!--                   投票部分終了-->
+                </div>
+                <div class="col-sm-5 col-md-3  col-lg-3">
+                   <div class="spance-ad visible-xs-block"></div>
+                    <div class="ad list-group">
+                        <a href="#" class="list-group-item active">Link</a>
+                        <a href="#" class="list-group-item">Link</a>
+                        <a href="#" class="list-group-item">Link</a>
+                        <a href="#" class="list-group-item">Link</a>
+                        <a href="#" class="list-group-item">Link</a>
+                        <a href="#" class="list-group-item">Link</a>
+                        <a href="#" class="list-group-item">Link</a>
+                        <a href="#" class="list-group-item">Link</a>
+                        <a href="#" class="list-group-item">Link</a>
+                        <a href="#" class="list-group-item">Link</a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-
-</div>
-</div>
     <!-- Main jumbotron for a primary marketing message or call to action -->
     
     

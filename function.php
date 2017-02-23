@@ -1,12 +1,5 @@
 <?php
 //DB接続関数（PDO）$pdo = db_con();
-//function db_con(){
-//    try {
-//      return new PDO('mysql:dbname=lowcarbolife_mylocabo;charset=utf8;host=mysql328.db.sakura.ne.jp','lowcarbolife','Ncc21ccc');
-//    } catch (PDOException $e) {
-//      exit('DbConnectError:'.$e->getMessage());
-//    }
-//}
 //ローカルファイルで作業時
 function db_con(){
     try {
@@ -29,9 +22,7 @@ function loginSessionSet($val){
     $_SESSION["area"] = $AS['area']; 
     $_SESSION["sex"] = $AS['sex']; 
     $_SESSION["introduction"] = $val['introduction']; 
-    $_SESSION["review_img"] = 0; 
-    
-    
+    $_SESSION["review_img"] = 0;  
 }
 
 //スタンス、エリア、性別、判定数値化
@@ -200,36 +191,13 @@ function change_money($val){
 //セッションチェック用関数
 function sessionCheck(){
   if(isset($_SESSION["chk_ssid"]) != session_id()){
-//      echo "ログインしてください";
+      //ログアウト時
       header("Location: ../index.php?login=no" );
-//      include(__DIR__."/mypage/index.php");
-//      var_dump( __DIR__."/mypage/index.php");
       exit();
   }else{
+      //ログイン時
      session_regenerate_id(true);
      $_SESSION["chk_ssid"] = session_id();
-//      include("login-header.php");
-      
-//      if( $_SESSION["review_img"] != 0 ){
-//              //口コミ投稿で画像アップロードだけされて、レビュー登録されていない画像を削除
-//              $pdo = db_con();
-//              $uploadimg = $_SESSION["review_img"];
-//              foreach ($uploadimg as $image_name) {
-//                    $stmt = $pdo->prepare("
-//                    DELETE FROM images_table 
-//                    WHERE image_name=:a1
-//                    ");
-//                    $stmt ->bindValue(':a1',$image_name,PDO::PARAM_STR);
-//                    $status = $stmt->execute();//セキュリティにいい書き方
-//                    if($status==false){
-//                        db_error($stmt);
-//                    }
-//                    unlink("../upload/".$image_name);
-//                    unlink("../upload/s/".$image_name);
-//                } 
-//      }
-      
-      
   }
 }
 
@@ -264,7 +232,6 @@ function fileUniqRenameSingle($file_name){
 function fileUniqRename($file_name,$val){
   $extension = pathinfo($file_name, PATHINFO_EXTENSION); //拡張子取得
   $uniq_name = date("YmdHis").session_id()."0".$val.".".$extension; //ユニークファイル名作成
-//  $uniq_name = rand( ).session_id()."0".$val.".".$extension; //ユニークファイル名作成本番環境だとdata()がつかえない
   return $uniq_name;
 }
 ?>

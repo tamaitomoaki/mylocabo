@@ -1,7 +1,6 @@
 <?php
 session_start();
 include("../function.php");
-//2. セッションチェック(前ページのSESSION＿IDと現在のsession_idを比較)
 sessionCheck();//セッションの入れ替え
 
 $spot_id = $_GET["spot_id"];
@@ -55,18 +54,6 @@ if($status==false){
     db_error($stmt);
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
 $pagetype =  $_SERVER["REQUEST_URI"];
 ?>
 <!DOCTYPE html>
@@ -86,192 +73,175 @@ $pagetype =  $_SERVER["REQUEST_URI"];
     <!-- BootstrapのJS読み込み -->
     <script src="../js/bootstrap.js"></script>
     <style>
-        .jumbotron{
-            background:white;
+        .jumbotron {
+            background: white;
         }
-        .mypage-header{
-    background: #444444;
-            
+
+        .mypage-header {
+            background: #444444;
         }
-        .mypage-header a{
-            color:gray;
-            padding-top:10px;
-            padding-bottom:6px;
-            display:inline-block;
-            margin-right:20px;
+
+        .mypage-header a {
+            color: gray;
+            padding-top: 10px;
+            padding-bottom: 6px;
+            display: inline-block;
+            margin-right: 20px;
         }
-        .mypage-header .mypage-active{
-            color:white;
-            border-bottom:4px solid #7ebb45; 
+
+        .mypage-header .mypage-active {
+            color: white;
+            border-bottom: 4px solid #7ebb45;
         }
-/*                リンク装飾*/
-        a:link{
-   text-decoration: none ;
-        } 
-        a:visited{
- text-decoration: none ;
-        } 
-        a:hover{
-            cursor:pointer;
-/*            text-decoration: none ;*/
-        } 
-        a:active{
-text-decoration: none ;
+        /*                リンク装飾*/
+
+        a:link {
+            text-decoration: none;
         }
-/*        スポット情報の文字サイズ*/
-        form{
-            font-size:18px;
+
+        a:visited {
+            text-decoration: none;
         }
-/*        マップ*/
-        .spotmap{
-            width:100%;
+
+        a:hover {
+            cursor: pointer;
+            /*            text-decoration: none ;*/
         }
-/*        編集ボタン*/
+
+        a:active {
+            text-decoration: none;
+        }
+        /*        スポット情報の文字サイズ*/
+
+        form {
+            font-size: 18px;
+        }
+        /*        マップ*/
+
+        .spotmap {
+            width: 100%;
+        }
+        /*        編集ボタン*/
+
         .btn-edit,
-        .btn-edit-stop{
-            margin-top:10px;
+        .btn-edit-stop {
+            margin-top: 10px;
         }
-        
-  
-      </style>
+    </style>
   </head>
 <body>
     <!-- container -->
-<div id="index-main">
-    <nav class="navbar navbar-default navbar-fixed-top">
+    <div id="index-main">
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="../index.php">マイロカボ</a>
+                    <!--小さいデバイス時のメニューボタン-->
+                    <?php include( '../External/menu-btn-small.php'); ?>
+                </div>
+                <!--PCデバイス時のメニューボタン-->
+                <?php include( '../External/menu-btn-large.php'); ?>
+
+            </div>
+        </nav>
+    <!--    メニュー-->
+    <div class="mypage-header">
         <div class="container">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="../index.php">マイロカボ</a>
-                <!--小さいデバイス時のメニューボタン-->
-                <?php include( '../External/menu-btn-small.php'); ?>
-            </div>
-            <!--PCデバイス時のメニューボタン-->
-            <?php include( '../External/menu-btn-large.php'); ?>
-         
-        </div>
-    </nav>
-<!--    メニュー-->
-<div class="mypage-header">
-    <div class="container">
-        <a href="#" class="mypage-active">スポットの情報を編集</a>
-<!--        最終更新者の名前を記述する-->
-    </div>
-</div>
-<div class="container">
-    <div class="row">
-        <div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
-
- 
-               
-                
-
-
-    <form method="post" class="form-horizontal">
-       <div class="page-header">
-  <h3>編集したい項目をクリックしてください。</h3>
-</div>
-        <div class="form-group">
-		<label class="col-sm-3 control-label">名称</label>
-		<div class="col-sm-9">
-			<p class="form-control-static"><a data-toggle="collapse" href="#collapse-spotname" id="display-spotname"><?=$spotname?></a></p>
-			<!--           スライド出現部分-->
-            <div class="collapse" id="collapse-spotname">
-                <div class="well">
-                    <input type="text" class="form-control input-lg" id="spotname" name="spotname" placeholder="（例）飲食店">
-                    <a class="btn btn-default btn-edit" role="button">変更する</a>
-                    <a class="btn btn-default btn-edit-stop spotname" role="button">変更をやめる</a>
-                </div>
-            </div>
-            <!--           終了-->
-		</div>
-	</div>
-	<div class="form-group">
-		<label class="col-sm-3 control-label">住所</label>
-		<div class="col-sm-9">
-			<p class="form-control-static"><a href=""><?=$address?></a></p>
-			<div class="spotheader">
-                <a href="http://maps.google.com/maps?q=<?=h($lat)?>,<?=h($lng)?>">
-                    <img src="https://maps.googleapis.com/maps/api/staticmap?zoom=20&size=800x400&sensor=false&key=AIzaSyCKO-biURT4s7DR5PeZ8nAeAHureZpS0Gs&markers=size%3Amid%7C<?=h($lat)?>%2C<?=h($lng)?>" alt="" class="spotmap">
-                </a>
-            </div>
-		</div>
-	</div>
-	<div class="form-group">
-		<label class="col-sm-3 control-label">カテゴリー</label>
-		<div class="col-sm-9">
-			<p class="form-control-static"><a href="" data-toggle="modal" data-target="#edit-category" id="category"><?=$category?></a></p>
-            <!--           スライド出現部分-->
-<!--
-            <div class="collapse" id="collapse-category">
-                <div class="well">
-                    <input type="text" class="form-control input-lg" id="category" name="category" placeholder="（例）飲食店">
-                    <a class="btn btn-default btn-edit" role="button">変更する</a>
-                    <a class="btn btn-default btn-edit-stop category" role="button">変更をやめる</a>
-                </div>
-            </div>
--->
-            <!--           終了-->
-		</div>
-
-	</div>
-	
-	<div class="form-group">
-		<label class="col-sm-3 control-label">URL</label>
-		<div class="col-sm-9">
-			<p class="form-control-static"><a data-toggle="collapse" href="#collapse-url" id="display-url"><?=$url?></a></p>
-			<!--           スライド出現部分-->
-            <div class="collapse" id="collapse-url">
-                <div class="well">
-                    <input type="url" class="form-control input-lg" id="url" name="url" placeholder="（例）飲食店">
-                    <a class="btn btn-default btn-edit" role="button">変更する</a>
-                    <a class="btn btn-default btn-edit-stop url" role="button">変更をやめる</a>
-                </div>
-            </div>
-            <!--           終了-->
-		</div>
-	</div>
-	<div class="form-group">
-		<label class="col-sm-3 control-label">電話番号</label>
-		<div class="col-sm-9">
-			<p class="form-control-static"><a data-toggle="collapse" href="#collapse-tel" id="display-tel"><?=$tel?></a></p>
-			<!--           スライド出現部分-->
-            <div class="collapse" id="collapse-tel">
-                <div class="well">
-                    <input type="text" class="form-control input-lg" id="tel" name="tel" placeholder="（例）飲食店">
-                    <a class="btn btn-default btn-edit" role="button">変更する</a>
-                    <a class="btn btn-default btn-edit-stop tel" role="button">変更をやめる</a>
-                </div>
-            </div>
-            <!--           終了-->
-		</div>
-	</div>
-	<div class="form-group">
-		<label class="col-sm-3 control-label">営業時間</label>
-		<div class="col-sm-9">
-			<p class="form-control-static"><a data-toggle="collapse" href="#collapse-open" id="display-open"><?=$open?></a></p>
-			<!--           スライド出現部分-->
-            <div class="collapse" id="collapse-open">
-                <div class="well">
-                    <input type="text" class="form-control input-lg" id="open" name="open" placeholder="（例）飲食店">
-                    <a class="btn btn-default btn-edit" role="button">変更する</a>
-                    <a class="btn btn-default btn-edit-stop open" role="button">変更をやめる</a>
-                </div>
-            </div>
-            <!--           終了-->
-		</div>
-	</div>
-    </form>
-
-  
-
-
-
+            <a href="#" class="mypage-active">スポットの情報を編集</a>
+    <!--        最終更新者の名前を記述する-->
         </div>
     </div>
-
-
-</div>
-</div>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+                    <form method="post" class="form-horizontal">
+                        <div class="page-header">
+                            <h3>編集したい項目をクリックしてください。</h3>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">名称</label>
+                            <div class="col-sm-9">
+                                <p class="form-control-static"><a data-toggle="collapse" href="#collapse-spotname" id="display-spotname"><?=$spotname?></a></p>
+                                <!--           スライド出現部分-->
+                                <div class="collapse" id="collapse-spotname">
+                                    <div class="well">
+                                        <input type="text" class="form-control input-lg" id="spotname" name="spotname" placeholder="（例）飲食店">
+                                        <a class="btn btn-default btn-edit" role="button">変更する</a>
+                                        <a class="btn btn-default btn-edit-stop spotname" role="button">変更をやめる</a>
+                                    </div>
+                                </div>
+                                <!--           終了-->
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">住所</label>
+                            <div class="col-sm-9">
+                                <p class="form-control-static"><a href=""><?=$address?></a></p>
+                                <div class="spotheader">
+                                    <a href="http://maps.google.com/maps?q=<?=h($lat)?>,<?=h($lng)?>">
+                                        <img src="https://maps.googleapis.com/maps/api/staticmap?zoom=20&size=800x400&sensor=false&key=AIzaSyCKO-biURT4s7DR5PeZ8nAeAHureZpS0Gs&markers=size%3Amid%7C<?=h($lat)?>%2C<?=h($lng)?>" alt="" class="spotmap">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">カテゴリー</label>
+                            <div class="col-sm-9">
+                                <p class="form-control-static"><a href="" data-toggle="modal" data-target="#edit-category" id="category"><?=$category?></a></p>
+                                <!--           スライド出現部分-->
+                                <!--           終了-->
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">URL</label>
+                            <div class="col-sm-9">
+                                <p class="form-control-static"><a data-toggle="collapse" href="#collapse-url" id="display-url"><?=$url?></a></p>
+                                <!--           スライド出現部分-->
+                                <div class="collapse" id="collapse-url">
+                                    <div class="well">
+                                        <input type="url" class="form-control input-lg" id="url" name="url" placeholder="（例）飲食店">
+                                        <a class="btn btn-default btn-edit" role="button">変更する</a>
+                                        <a class="btn btn-default btn-edit-stop url" role="button">変更をやめる</a>
+                                    </div>
+                                </div>
+                                <!--           終了-->
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">電話番号</label>
+                            <div class="col-sm-9">
+                                <p class="form-control-static"><a data-toggle="collapse" href="#collapse-tel" id="display-tel"><?=$tel?></a></p>
+                                <!--           スライド出現部分-->
+                                <div class="collapse" id="collapse-tel">
+                                    <div class="well">
+                                        <input type="text" class="form-control input-lg" id="tel" name="tel" placeholder="（例）飲食店">
+                                        <a class="btn btn-default btn-edit" role="button">変更する</a>
+                                        <a class="btn btn-default btn-edit-stop tel" role="button">変更をやめる</a>
+                                    </div>
+                                </div>
+                                <!--           終了-->
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">営業時間</label>
+                            <div class="col-sm-9">
+                                <p class="form-control-static"><a data-toggle="collapse" href="#collapse-open" id="display-open"><?=$open?></a></p>
+                                <!--           スライド出現部分-->
+                                <div class="collapse" id="collapse-open">
+                                    <div class="well">
+                                        <input type="text" class="form-control input-lg" id="open" name="open" placeholder="（例）飲食店">
+                                        <a class="btn btn-default btn-edit" role="button">変更する</a>
+                                        <a class="btn btn-default btn-edit-stop open" role="button">変更をやめる</a>
+                                    </div>
+                                </div>
+                                <!--           終了-->
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- /container -->
     
 <!-- モーダル・ダイアログ カテゴリー編集-->
@@ -283,22 +253,12 @@ text-decoration: none ;
 				<h4 class="modal-title">カテゴリーを選択してください。</h4>
 			</div>
 			<div class="modal-body" id="list">
-			
-			
-			<?php
-                while( $result = $stmt->fetch(PDO::FETCH_ASSOC)){
+<?php
+    while( $result = $stmt->fetch(PDO::FETCH_ASSOC)){    
+        echo '<button class="btn btn-default item-category btn-block btn-lg" id="item-category">'.$result["category_name"].'</button>';
 
-                    
-                    echo '<button class="btn btn-default item-category btn-block btn-lg" id="item-category">'.$result["category_name"].'</button>';
-
-
-
-                }
-                
-                
-                
-            ?>
-<!--				<button class="btn btn-default item-category btn-block btn-lg" id="other">その他</button>-->
+    }        
+?>
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">閉じる</button>
@@ -307,9 +267,6 @@ text-decoration: none ;
 		</div>
 	</div>
 </div>
-
-    
-
 
 
 <!--スマホサイズのメニュー画面展開画面-->
@@ -335,9 +292,6 @@ text-decoration: none ;
     $(".item-category").on("click", function(e){
         newcategory = e.target.innerHTML;
 
-
-
-
 //        編集データ登録
             if (window.confirm('本当に変更してもよろしいですか？')) {
                 $('#edit-category').modal('hide');
@@ -359,15 +313,7 @@ text-decoration: none ;
                 'edit_act.php?data=' + nowcategory + '&id=' + id + '&spot_id=' + spot_id + '&data2=' + newcategory
             );
         }
-//        $("#display-category").empty();//表示部分を空に
-//        if ( category == "その他" ){
-//            $("#suggest").removeClass("hide");
-//            $("#suggest").addClass("show");
-//            
-//        }
-//        $("#display-category").html(category);//表示部分に選択したカテゴリーを表示
-//        $("#category").val(category);//取得したカテゴリーをvalueに代入
-//        $('#select-category').modal('hide');
+
     });
     
 //スポット情報,url,tel,openの変更の処理
@@ -405,12 +351,6 @@ text-decoration: none ;
         $("#"+type).val("");
     });
     
-    
-    
-    
-    
-    
-
 var area = '<?=$_SESSION["area_num"]?>';
 var sex = '<?=$_SESSION["sex_num"]?>';
 
@@ -427,21 +367,8 @@ var sex = '<?=$_SESSION["sex_num"]?>';
         area = $("#area").val();
         sex = $("#sex").val();
     });
-    
-
-    
-    
-</script>  
-        
-        
-        
-        
-
-
-
-   
  
+</script>  
 
-  
 </body>
 </html>

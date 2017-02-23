@@ -1,8 +1,6 @@
 <?php
 session_start();
 include("function.php");
-//2. セッションチェック(前ページのSESSION＿IDと現在のsession_idを比較)
-//sessionCheck();//セッションの入れ替え
 
 
 //入力チェック(受信確認処理追加)
@@ -11,7 +9,6 @@ if(
   !isset($_POST["password"]) || $_POST["password"]==""
 ){
     header("location: ./index.php");
-//    echo "ok";
     exit();
 }
 
@@ -35,7 +32,6 @@ if($res==false){
 }
 
 //３．抽出データ数を取得
-//$count = $stmt->fetchColumn(); //SELECT COUNT(*)で使用可能()
 $val = $stmt->fetch(); //1レコードだけ取得する方法
 
 //４. 該当レコードがあればSESSIONに値を代入
@@ -59,10 +55,7 @@ if( $val["menber_id"] != "" ){
   //logout処理を経由して全画面へ
   header("Location: ./index.php");
 }
-
 exit();
-
-
 
 ?>
 

@@ -1,11 +1,8 @@
 <?php
 session_start();
 include("../function.php");
-//2. セッションチェック(前ページのSESSION＿IDと現在のsession_idを比較)
-//sessionCheck();//セッションの入れ替え
+
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -24,32 +21,33 @@ include("../function.php");
     <script src="../js/bootstrap.js"></script>
     <style>
         /*スタンスの違いを表す色*/
-        
+
         .marker_yellow_hoso {
             background: linear-gradient(transparent 60%, #ffff66 60%);
             color: #545454;
         }
-        
+
         .marker_red_hoso {
             background: linear-gradient(transparent 60%, #ff7466 60%);
             color: #545454;
         }
-        
+
         .marker_green_hoso {
             background: linear-gradient(transparent 60%, #ceff66 60%);
             color: #545454;
         }
         /*    モーダルのデザイン*/
-        
+
         .modal-footer {
             text-align: left;
             color: gray;
         }
-/*        フォームのデザイン*/
-        .note{
-            color:gray;
-            margin-top:5px;
-            margin-bottom:5px;
+        /*        フォームのデザイン*/
+
+        .note {
+            color: gray;
+            margin-top: 5px;
+            margin-bottom: 5px;
         }
     </style>
 </head>
@@ -81,26 +79,7 @@ include("../function.php");
                         <input type="password" class="form-control input-lg validate[required]" name="password" id="password" placeholder="パスワード" autocomplete="off" required>
                         <p class="note">※8文字以上12文字未満の半角英数字</p>
                         <a class="btn btn-default" role="button" id="password-show">パスワードを表示する</a>
-                    </div>
-                    
-                    <!--        スタンス-->
-<!--
-                    <div class="form-group">
-                                            <label for="stance">スタンス</label>
-                        <select class="form-control input-lg" name="stance" id="stance" onchange="changeItem(this)" required style='color:#989898;'>
-                                  <option value='0' disabled selected style='display:none;'>スタンス</option>
-                                   <option value='1'>きっちり</option>
-                                   <option value='2'>しっかり</option>
-                                   <option value='3'>ゆるく</option>
-                                </select>
-                    </div>
-                    <hr>
-                    <a href="" data-toggle="modal" data-target="#sampleModal">
-                        <h4>スタンスとは・・・</h4>
-                    </a>
-                    <hr>
--->
-                    
+                    </div>                    
                     <p>
                         <button type="submit" class="btn btn-success btn-lg btn-block" id="registration">登録する</button> 
                         <a href="#" class="btn btn-success btn-lg btn-block" disabled="disabled" id="loading"><img src="../img/ajax-loader.gif" alt=""></a>
@@ -128,63 +107,45 @@ include("../function.php");
             </div>
         </div>
     </div>
-    <script>
-        $("#loading").hide();
+<script>
+    $("#loading").hide();
         
 //パスワードのバリデーション
-          $("form").submit(function(){
-              //submitされた時のパスワードのチェック
-            if( !$("input[name=password]").val().match(/^[a-z\d]{8,12}$/i) ){
-              alert("パスワードの入力は8文字以上12文字以内の半角英数字でお願いします。");
-//              return false;
-            }
-            return true;
-          });
+    $("form").submit(function(){
+      //submitされた時のパスワードのチェック
+    if( !$("input[name=password]").val().match(/^[a-z\d]{8,12}$/i) ){
+      alert("パスワードの入力は8文字以上12文字以内の半角英数字でお願いします。");
+    }
+    return true;
+    });
 //パスワードの表示、非表示切り替え
-        $("#password-show").on("click", function(e){
-            console.log(e.target.innerHTML);
-            var state = e.target.innerHTML;
-            if ( state == "パスワードを表示する" ) {
-                $('#password').attr('type','text');
-                $(this).html("パスワードを隠す");
-            } else {
-                $('#password').attr('type','password');
-                $(this).html("パスワードを表示する");
-            }
+    $("#password-show").on("click", function(e){
+        console.log(e.target.innerHTML);
+        var state = e.target.innerHTML;
+        if ( state == "パスワードを表示する" ) {
+            $('#password').attr('type','text');
+            $(this).html("パスワードを隠す");
+        } else {
+            $('#password').attr('type','password');
+            $(this).html("パスワードを表示する");
+        }
 
-        });
-
-        
-        $("#registration").submit(function(){
-            $("#registration").hide();
-            $("#loading").show();
-        });
-        //スタンスselectの文字の色の調整
-        function changeItem(obj){ 
-            if( obj.value != 0 ){ 
-                obj.style.color = '#555'; 
-            }
-        } 
-        $("#registration").on("click",function(){
-            var name = $("#name").val();
-            var email = $("#email").val();
-            var pass = $("#password").val();
-        });
-//        //入力されているかのチェック
-//        $("input, select").blur(function(){
-//            var name = $("#name").val();
-//            var email = $("#email").val();
-//            var pass = $("#password").val();
-//            var stance = $("#stance").val();
-//            if( name.length > 0 && email.length > 0 && pass.length > 0 && stance != null ){
-//                $('#registration').removeAttr('disabled');
-//            }else{
-//                $('#registration').attr('disabled', 'disabled');
-//            }
-//        });
-//        $("input").focus(function(){
-//            $('#registration').attr('disabled', 'disabled');
-//        });
-    </script>   
+    });
+    $("#registration").submit(function(){
+        $("#registration").hide();
+        $("#loading").show();
+    });
+    //スタンスselectの文字の色の調整
+    function changeItem(obj){ 
+        if( obj.value != 0 ){ 
+            obj.style.color = '#555'; 
+        }
+    } 
+    $("#registration").on("click",function(){
+        var name = $("#name").val();
+        var email = $("#email").val();
+        var pass = $("#password").val();
+    });
+</script>   
 </body>
 </html>

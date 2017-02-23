@@ -1,27 +1,21 @@
 <?php
 session_start();
 include("../function.php");
-//2. セッションチェック(前ページのSESSION＿IDと現在のsession_idを比較)
 sessionCheck();//セッションの入れ替え
 
 //値を受け取っているか確認
 if(
   !isset($_GET["spot_id"]) || $_GET["spot_id"]=="" 
 ){
-//  exit('ParamError');
     header("location: ../index.php");
-//    echo "ok";
     exit();
 }
-
 
 $spot_id = $_GET["spot_id"];
 
 $spot_id = str_replace("spot", "", $spot_id);
 
 $pdo = db_con();
-
-
 
 $stmt = $pdo->prepare("
 SELECT A.review_id, A.comment, B.name, C.spotname, C.address
@@ -35,12 +29,7 @@ $stmt->bindValue(':a1', $spot_id,   PDO::PARAM_INT);  //Integer（数値の場�
 
 $status = $stmt->execute();
 
-
-//$val = $stmt->fetch();
 $result = $stmt->fetchAll();
-
-
-
 
 echo json_encode( $result );
 ?>

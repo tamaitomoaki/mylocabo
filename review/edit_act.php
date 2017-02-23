@@ -1,14 +1,8 @@
 <?php
 session_start();
 include("../function.php");
-//2. セッションチェック(前ページのSESSION＿IDと現在のsession_idを比較)
+
 sessionCheck();//セッションの入れ替え
-
-
-//var_dump($_POST["uploadtag"]);
-//var_dump($_POST["deletetag"]);
-//
-//exit();
 
 //入力チェック(受信確認処理追加)
 //コメントをセッションに入れているので、送られてきていないのでページが必ず戻る
@@ -26,8 +20,6 @@ if(
     exit;
 }
  
-
-
 //取得データを変数へ
 $time = $_POST["time"];
 $money = $_POST["money"];
@@ -36,7 +28,6 @@ $point = $_POST["point"];
 $review_id = $_POST["review_id"];
 $menber_id = $_SESSION["menber_id"];
 $spot_id = $_POST["spot_id"];
-//$stance = $_SESSION["stance_num"];
 
 
 //DB接続
@@ -117,7 +108,7 @@ $result = array_values($result);//indexを詰める
             VALUES(:a1, :a2, :a3, sysdate())
             ON DUPLICATE KEY UPDATE usage_count = usage_count + VALUES(usage_count)
             ');
-            //タグ　 ON DUPLICATE KEY UPDATE tag_id = LAST_INSERT_ID(tag_id), usage_count = usage_count + VALUES(usage_count)が記述されていたが、なんでLAST_INSERT_IDをしているのかわからない、アップデートするならカウントだけでいいのでは？カウントだけにしてみた
+            //タグ　 
             $stmt->bindValue(':a1', $tag_name, PDO::PARAM_STR);  //Integer（数値の場合 PDO::PARAM_INT)
             $stmt->bindValue(':a2', 1, PDO::PARAM_INT);  //Integer（数値の場合 PDO::PARAM_INT)
             $stmt->bindValue(':a3', $menber_id, PDO::PARAM_INT);  //Integer（数値の場合 PDO::PARAM_INT)
@@ -181,11 +172,6 @@ $result = array_values($result);//indexを詰める
 
         }
     }
-//        var_dump("test");
-//        exit;
-
-
-
 
 //DB接続
 //$pdo = db_con();
@@ -208,24 +194,6 @@ if($status==false){
     db_error($stmt);
 }
 
-
-
-
-
-
-
-
-
-
-
-
-////口コミ投稿時にセットした変数を破棄
-//unset($_SESSION["review_spot_id"],
-//      $_SESSION["review_spotname"],
-//      $_SESSION["review_comment"],
-//      $_SESSION["review_point"]
-//     ); 
-//$_SESSION["review_img"] = 0;
 header("Location: ../mypage/index.php");
 exit;
 

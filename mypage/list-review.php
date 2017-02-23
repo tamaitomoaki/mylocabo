@@ -5,17 +5,13 @@ include("../function.php");
 if(
   !isset($_GET["menber_id"]) || $_GET["menber_id"]=="" 
 ){
-//  exit('ParamError');
     header("location: ./index.php");
-//    echo "ok";
     exit();
 }
 
 $menber_id = $_GET["menber_id"];
 
 $pdo = db_con();
-
-
 
 $stmt = $pdo->prepare("
 SELECT A.review_id, A.time, A.money, A.comment, A.spot_id, A.D_point, A.L_point, A.review_point, B.image_name, C.images_name, D.spotname, D.lat, D.lng, E.tag_review_map_ids, E.tags_name, F.category_name
@@ -63,8 +59,6 @@ while( $result = $stmt->fetch(PDO::FETCH_ASSOC)){
     $reviewlist[$i]["money"] = change_money($result["money"]);
     $i += 1;
 }
-
-
 
 echo json_encode( $reviewlist );
 ?>
